@@ -41,17 +41,29 @@ import time
 datetime = "2020-03-11 19:26:13"
 # 先将str转换为时间元组
 # time.strptime(str,fmt='...')根据fmt的格式把一个时间字符串str解析为时间元组。	
-timetuple = time.strptime(datetime, "%Y-%m-%d %H:%M:%S")
+timetuple = time.strptime(datetime, "%Y-%m-%d %H:%M:%S") # time.struct_time(tm_year=2020, tm_mon=3, tm_mday=11, tm_hour=19, tm_min=26, tm_sec=13, tm_wday=2, tm_yday=71, tm_isdst=-1) <class 'time.struct_time'>
 # 将时间元组转换成时间戳
 # time.mktime()接受时间元组并返回时间戳（1970纪元后经过的浮点秒数）
-timestamp = time.mktime(timetuple)
+timestamp = time.mktime(timetuple) # 1583925973.0 <class 'float'>
 
 ### 时间戳转换为datetime字符串
 # float类型时间戳，小数点前10位
-timestamp = time.time()
+timestamp = time.time() # 1584278483.256262 <class 'float'>
 # 时间戳转换为时间元组
 # time.localtime([secs])接收时间戳（1970纪元后经过的浮点秒数），返回当地时间下的时间元组t
-timetuple = time.localtime(timestamp)
+timetuple = time.localtime(timestamp) # time.struct_time(tm_year=2020, tm_mon=3, tm_mday=15, tm_hour=21, tm_min=21, tm_sec=23, tm_wday=6, tm_yday=75, tm_isdst=0) <class 'time.struct_time'>
 # 时间元组转为datetime字符串
 # time.strftime(fmt[,tupletime])接收时间元组，返回以可读字符串表示的当地时间，格式由fmt决定。
-datetime = time.strftime("%Y-%m-%d %H:%M:%S", timetuple)
+datetime = time.strftime("%Y-%m-%d %H:%M:%S", timetuple) # 2020-03-15 21:21:23 <class 'str'>
+
+
+### 使用datetime库显示datetime字符串
+# 时间戳转为datetime字符串格式
+timeStamp = time.time() # 1584278312.2667465 <class 'float'>
+dateArray = datetime.datetime.fromtimestamp(timeStamp) # 2020-03-15 21:18:32.266747 <class 'datetime.datetime'>
+# datetime.datetime.strftime()方法接收日期格式返回该格式字符串
+otherStyleTime = dateArray.strftime("%Y-%m-%d %H:%M:%S") # 2020-03-15 21:18:32 <class 'str'>
+
+# datetime获取当前时间，转为字符串格式
+now = datetime.datetime.now() # 2020-03-15 20:58:00.147842 <class 'datetime.datetime'>
+otherStyleTime = now.strftime("%Y-%m-%d %H:%M:%S") # 2020-03-15 20:58:00 <class 'str'>
